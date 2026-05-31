@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Erik",
+        "warrior": 9,
+        "king": 9,
+        "magician": 9,
+        "lover": 5
+    },
+    {
+        "name": "erik",
+        "warrior": 9,
+        "king": 9,
+        "magician": 9,
+        "lover": 5
+    }
+]
