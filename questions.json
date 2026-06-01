@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "assessment": "iron_rite",
+        "question": "I willingly take responsibility when things go wrong.",
+        "category": "King",
+        "dimension": "Responsibility"
+    },
+    {
+        "id": 2,
+        "assessment": "iron_rite",
+        "question": "People naturally look to me for direction during uncertainty.",
+        "category": "King",
+        "dimension": "Leadership"
+    },
+    {
+        "id": 3,
+        "assessment": "iron_rite",
+        "question": "I regularly think about long-term outcomes before making decisions.",
+        "category": "King",
+        "dimension": "Vision"
+    },
+    {
+        "id": 4,
+        "assessment": "iron_rite",
+        "question": "I create systems and structure that improve consistency.",
+        "category": "King",
+        "dimension": "Order"
+    },
+    {
+        "id": 5,
+        "assessment": "iron_rite",
+        "question": "I feel responsible for the growth and well-being of those I lead.",
+        "category": "King",
+        "dimension": "Service"
+    },
+    {
+        "id": 6,
+        "assessment": "iron_rite",
+        "question": "I follow through on commitments even when motivation disappears.",
+        "category": "Warrior",
+        "dimension": "Discipline"
+    },
+    {
+        "id": 7,
+        "assessment": "iron_rite",
+        "question": "I take action despite fear or uncertainty.",
+        "category": "Warrior",
+        "dimension": "Courage"
+    },
+    {
+        "id": 8,
+        "assessment": "iron_rite",
+        "question": "I move quickly when decisive action is needed.",
+        "category": "Warrior",
+        "dimension": "Action"
+    },
+    {
+        "id": 9,
+        "assessment": "iron_rite",
+        "question": "I maintain healthy boundaries even when others dislike them.",
+        "category": "Warrior",
+        "dimension": "Boundaries"
+    },
+    {
+        "id": 10,
+        "assessment": "iron_rite",
+        "question": "I remain effective under pressure and adversity.",
+        "category": "Warrior",
+        "dimension": "Endurance"
+    },
+    {
+        "id": 11,
+        "assessment": "iron_rite",
+        "question": "I actively seek knowledge and understanding.",
+        "category": "Magician",
+        "dimension": "Knowledge"
+    },
+    {
+        "id": 12,
+        "assessment": "iron_rite",
+        "question": "I enjoy solving complex problems.",
+        "category": "Magician",
+        "dimension": "Problem Solving"
+    },
+    {
+        "id": 13,
+        "assessment": "iron_rite",
+        "question": "I look for hidden patterns behind events.",
+        "category": "Magician",
+        "dimension": "Insight"
+    },
+    {
+        "id": 14,
+        "assessment": "iron_rite",
+        "question": "I think several moves ahead before acting.",
+        "category": "Magician",
+        "dimension": "Strategy"
+    },
+    {
+        "id": 15,
+        "assessment": "iron_rite",
+        "question": "I am highly aware of my thoughts, emotions, and behaviors.",
+        "category": "Magician",
+        "dimension": "Awareness"
+    },
+    {
+        "id": 16,
+        "assessment": "iron_rite",
+        "question": "I form deep and meaningful connections with others.",
+        "category": "Lover",
+        "dimension": "Connection"
+    },
+    {
+        "id": 17,
+        "assessment": "iron_rite",
+        "question": "I regularly express creativity in some form.",
+        "category": "Lover",
+        "dimension": "Creativity"
+    },
+    {
+        "id": 18,
+        "assessment": "iron_rite",
+        "question": "I can genuinely understand another person's emotional experience.",
+        "category": "Lover",
+        "dimension": "Empathy"
+    },
+    {
+        "id": 19,
+        "assessment": "iron_rite",
+        "question": "I am fully present during important moments.",
+        "category": "Lover",
+        "dimension": "Presence"
+    },
+    {
+        "id": 20,
+        "assessment": "iron_rite",
+        "question": "I experience enthusiasm and appreciation for life.",
+        "category": "Lover",
+        "dimension": "Vitality"
+    }
+]
