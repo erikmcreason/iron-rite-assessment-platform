@@ -1,226 +1,308 @@
 import json
 
-brothers = []
+
+def load_questions():
+    try:
+        with open("questions.json", "r") as file:
+            questions = json.load(file)
+        return questions
+    except FileNotFoundError:
+        print("questions.json not found.")
+        return []
 
 
-def load_brothers():
-    global brothers
-
+def load_assessments():
     try:
         with open("brothers.json", "r") as file:
-            brothers = json.load(file)
-
-        print("Existing brothers loaded.")
-
+            assessments = json.load(file)
+        return assessments
     except FileNotFoundError:
-        brothers = []
-        print("No saved brothers found. Starting fresh.")
+        return []
 
 
-def save_brothers():
+def save_assessments(assessments):
     with open("brothers.json", "w") as file:
-        json.dump(brothers, file, indent=4)
+        json.dump(assessments, file, indent=4)
 
-    print("Brothers saved.")
-
-
-def get_scores(brother):
-    return {
-        "Warrior": brother["warrior"],
-        "King": brother["king"],
-        "Magician": brother["magician"],
-        "Lover": brother["lover"]
-    }
+    print("Assessments saved.")
 
 
-def get_dominant_archetype(brother):
-    scores = get_scores(brother)
-    return max(scores, key=scores.get)
+def ask_question(question):
+    while True:
+        print("\n" + question["question"])
+        print("Category:", question["category"])
+        print("Dimension:", question["dimension"])
+
+        answer = input("Score 1-10: ")
+
+        if answer.isdigit():
+            answer = int(answer)
+            if answer >= 1 and answer <= 10:
+                return answer
+
+        print("Invalid answer. Enter a number from 1 to 10.")
 
 
-def get_growth_area(brother):
-    scores = get_scores(brother)
-    return min(scores, key=scores.get)
-
-
-def get_average_score(brother):
-    total = brother["warrior"] + brother["king"] + brother["magician"] + brother["lover"]
-    return total / 4
-
-
-def get_assessment_text(dominant, growth_area):
-    assessment = ""
-
-    if dominant == "Warrior":
-        assessment += "Primary strength: disciplined action, courage, endurance, and execution.\n"
-    elif dominant == "King":
-        assessment += "Primary strength: leadership, order, responsibility, and vision.\n"
-    elif dominant == "Magician":
-        assessment += "Primary strength: insight, strategy, learning, and pattern recognition.\n"
-    elif dominant == "Lover":
-        assessment += "Primary strength: connection, creativity, beauty, emotion, and vitality.\n"
-
-    if growth_area == "Warrior":
-        assessment += "Primary growth area: stronger discipline, boundaries, physical action, and decisive movement."
-    elif growth_area == "King":
-        assessment += "Primary growth area: clearer leadership, structure, ownership, and long-term vision."
-    elif growth_area == "Magician":
-        assessment += "Primary growth area: deeper study, reflection, strategy, and self-awareness."
-    elif growth_area == "Lover":
-        assessment += "Primary growth area: deeper connection, emotional presence, play, beauty, and relational openness."
-
-    return assessment
+def calculate_average(scores):
+    return sum(scores) / len(scores)
 
 
 def get_recommendation(growth_area):
     if growth_area == "Warrior":
-        return "Recommended practice: complete one difficult physical task today and set one firm boundary."
-
+        return "Build discipline through one difficult physical action and one clear boundary."
     elif growth_area == "King":
-        return "Recommended practice: define one clear standard, make one leadership decision, and communicate it calmly."
-
+        return "Create order by making one leadership decision and communicating one clear standard."
     elif growth_area == "Magician":
-        return "Recommended practice: spend 20 minutes studying, journaling, or mapping the pattern behind a current problem."
-
+        return "Strengthen insight through study, reflection, and mapping the pattern behind one problem."
     elif growth_area == "Lover":
-        return "Recommended practice: create one moment of connection, beauty, gratitude, or emotional presence today."
-
+        return "Increase connection through presence, gratitude, beauty, creativity, or emotional openness."
     else:
-        return "Recommended practice: review the scores and choose one area for deliberate growth."
+        return "Review your results and choose one area for deliberate growth."
 
 
-def add_brother():
-    name = input("Enter brother name: ")
+def run_assessment():
+    questions = load_questions()
 
-    warrior = int(input("Warrior score (1-10): "))
-    king = int(input("King score (1-10): "))
-    magician = int(input("Magician score (1-10): "))
-    lover = int(input("Lover score (1-10): "))
-
-    brother = {
-        "name": name,
-        "warrior": warrior,
-        "king": king,
-        "magician": magician,
-        "lover": lover
-    }
-
-    brothers.append(brother)
-
-    print("Brother added.")
-
-
-def show_brothers():
-    print("\nBrother Profiles")
-
-    if len(brothers) == 0:
-        print("No brothers stored.")
+    if len(questions) == 0:
+        print("No questions loaded.")
         return
 
-    for brother in brothers:
-        dominant = get_dominant_archetype(brother)
-        growth_area = get_growth_area(brother)
-        average = get_average_score(brother)
+    name = input("Enter your name: ")
+    email = input("Enter your email: ")
 
-        print("\nName:", brother["name"])
-        print("Warrior:", brother["warrior"])
-        print("King:", brother["king"])
-        print("Magician:", brother["magician"])
-        print("Lover:", brother["lover"])
-        print("Dominant Archetype:", dominant)
-        print("Growth Area:", growth_area)
-        print("Average Score:", average)
+    category_results = {}
+    dimension_results = {}
+
+    print("\nIRON RITE ASSESSMENT")
+    print("--------------------")
+    print("Answer each question from 1 to 10.")
+    print("1 = Strongly disagree")
+    print("10 = Strongly agree")
+
+    for question in questions:
+        category = question["category"]
+        dimension = question["dimension"]
+        answer = ask_question(question)
+
+        if category not in category_results:
+            category_results[category] = []
+
+        category_results[category].append(answer)
+
+        if category not in dimension_results:
+            dimension_results[category] = {}
+
+        if dimension not in dimension_results[category]:
+            dimension_results[category][dimension] = []
+
+        dimension_results[category][dimension].append(answer)
+
+    category_scores = {}
+
+    for category, scores in category_results.items():
+        category_scores[category] = round(calculate_average(scores), 2)
+
+    dimension_scores = {}
+
+    for category, dimensions in dimension_results.items():
+        dimension_scores[category] = {}
+
+        for dimension, scores in dimensions.items():
+            dimension_scores[category][dimension] = round(calculate_average(scores), 2)
+
+    ranked_scores = sorted(
+        category_scores.items(),
+        key=lambda item: item[1],
+        reverse=True
+    )
+
+    dominant = ranked_scores[0][0]
+    growth_area = ranked_scores[-1][0]
+    recommendation = get_recommendation(growth_area)
+
+    assessment_record = {
+        "name": name,
+        "email": email,
+        "scores": category_scores,
+        "dimension_scores": dimension_scores,
+        "dominant": dominant,
+        "growth_area": growth_area,
+        "recommendation": recommendation
+    }
+
+    assessments = load_assessments()
+    assessments.append(assessment_record)
+    save_assessments(assessments)
+
+    print_assessment_result(assessment_record)
 
 
-def generate_report():
-    name = input("Enter brother name for report: ")
+def print_assessment_result(assessment):
+    print("\nIRON RITE ASSESSMENT RESULTS")
+    print("----------------------------")
+    print("Name:", assessment["name"])
+    print("Email:", assessment["email"])
 
-    for brother in brothers:
-        if brother["name"] == name:
-            dominant = get_dominant_archetype(brother)
-            growth_area = get_growth_area(brother)
-            average = get_average_score(brother)
-            assessment = get_assessment_text(dominant, growth_area)
-            recommendation = get_recommendation(growth_area)
+    ranked_scores = sorted(
+        assessment["scores"].items(),
+        key=lambda item: item[1],
+        reverse=True
+    )
 
-            print("\nIRON RITE ARCHETYPE REPORT")
-            print("--------------------------")
-            print("Name:", brother["name"])
-            print("Dominant Archetype:", dominant)
-            print("Growth Area:", growth_area)
-            print("Average Score:", average)
-            print("\nAssessment:")
-            print(assessment)
-            print("\nRecommendation:")
-            print(recommendation)
+    print("\nArchetype Scores:")
 
+    for category, score in ranked_scores:
+        print(category + ":", score)
+
+    print("\nDimension Scores:")
+
+    for category, dimensions in assessment["dimension_scores"].items():
+        print("\n" + category)
+
+        for dimension, score in dimensions.items():
+            print("  " + dimension + ":", score)
+
+    print("\nDominant Archetype:", assessment["dominant"])
+    print("Growth Area:", assessment["growth_area"])
+
+    print("\nRecommendation:")
+    print(assessment["recommendation"])
+
+
+def view_saved_assessments():
+    assessments = load_assessments()
+
+    print("\nSAVED ASSESSMENTS")
+    print("-----------------")
+
+    if len(assessments) == 0:
+        print("No saved assessments found.")
+        return
+
+    for index, assessment in enumerate(assessments):
+        print("\nRecord Number:", index + 1)
+        print("Name:", assessment.get("name", "Unknown"))
+        print("Email:", assessment.get("email", "No email saved"))
+        print("Dominant Archetype:", assessment["dominant"])
+        print("Growth Area:", assessment["growth_area"])
+
+        print("\nArchetype Scores:")
+
+        for category, score in assessment["scores"].items():
+            print(category + ":", score)
+
+
+def search_assessment():
+    assessments = load_assessments()
+
+    if len(assessments) == 0:
+        print("\nNo saved assessments to search.")
+        return
+
+    search_text = input("Enter name or email to search: ")
+    found_any = False
+
+    print("\nSEARCH RESULTS")
+    print("--------------")
+
+    for index, assessment in enumerate(assessments):
+        stored_name = assessment.get("name", "")
+        stored_email = assessment.get("email", "")
+
+        if search_text.lower() in stored_name.lower() or search_text.lower() in stored_email.lower():
+            found_any = True
+
+            print("\nRecord Number:", index + 1)
+            print("Name:", assessment.get("name", "Unknown"))
+            print("Email:", assessment.get("email", "No email saved"))
+            print("Dominant Archetype:", assessment["dominant"])
+            print("Growth Area:", assessment["growth_area"])
+
+    if found_any == False:
+        print("No matching assessments found.")
+
+
+def update_assessment_name():
+    assessments = load_assessments()
+
+    if len(assessments) == 0:
+        print("\nNo saved assessments to update.")
+        return
+
+    email = input("Enter email address for the assessment to update: ")
+
+    for assessment in assessments:
+        stored_email = assessment.get("email", "")
+
+        if stored_email.lower() == email.lower():
+            print("\nCurrent name:", assessment["name"])
+            new_name = input("Enter corrected name: ")
+
+            assessment["name"] = new_name
+
+            save_assessments(assessments)
+
+            print("\nAssessment name updated.")
             return
 
-    print("Brother not found.")
+    print("No assessment found with that email.")
 
 
-def update_brother():
-    name = input("Enter brother name to update: ")
+def delete_assessment():
+    assessments = load_assessments()
 
-    for brother in brothers:
-        if brother["name"] == name:
-            brother["warrior"] = int(input("New Warrior score: "))
-            brother["king"] = int(input("New King score: "))
-            brother["magician"] = int(input("New Magician score: "))
-            brother["lover"] = int(input("New Lover score: "))
+    if len(assessments) == 0:
+        print("\nNo saved assessments to delete.")
+        return
 
-            print("Brother updated.")
-            return
+    view_saved_assessments()
 
-    print("Brother not found.")
+    choice = input("\nEnter the record number to delete: ")
 
+    if not choice.isdigit():
+        print("Invalid choice. Enter a number.")
+        return
 
-def delete_brother():
-    name = input("Enter brother name to delete: ")
+    record_number = int(choice)
 
-    for brother in brothers:
-        if brother["name"] == name:
-            brothers.remove(brother)
-            print("Brother deleted.")
-            return
+    if record_number < 1 or record_number > len(assessments):
+        print("Invalid record number.")
+        return
 
-    print("Brother not found.")
+    deleted_assessment = assessments.pop(record_number - 1)
 
+    save_assessments(assessments)
 
-load_brothers()
+    print("\nDeleted assessment for:", deleted_assessment["name"])
+
 
 while True:
-    print("\nIRON RITE ARCHETYPE TRACKER")
-    print("1. Add Brother")
-    print("2. View Brothers")
-    print("3. Generate Report")
-    print("4. Update Brother")
-    print("5. Delete Brother")
-    print("6. Save")
-    print("7. Quit")
+    print("\nIRON RITE ASSESSMENT PLATFORM")
+    print("1. Run Assessment")
+    print("2. View Saved Assessments")
+    print("3. Search Assessment")
+    print("4. Update Assessment Name")
+    print("5. Delete Assessment")
+    print("6. Quit")
 
     choice = input("Choose an option: ")
 
     if choice == "1":
-        add_brother()
+        run_assessment()
 
     elif choice == "2":
-        show_brothers()
+        view_saved_assessments()
 
     elif choice == "3":
-        generate_report()
+        search_assessment()
 
     elif choice == "4":
-        update_brother()
+        update_assessment_name()
 
     elif choice == "5":
-        delete_brother()
+        delete_assessment()
 
     elif choice == "6":
-        save_brothers()
-
-    elif choice == "7":
-        save_brothers()
         print("Program ending.")
         break
 
