@@ -1,0 +1,131 @@
+[
+    {
+        "name": "Erik C",
+        "email": "erikmcreason@gmail.com",
+        "scores": {
+            "King": 10.0,
+            "Warrior": 9.2,
+            "Magician": 9.0,
+            "Lover": 7.8
+        },
+        "dimension_scores": {
+            "King": {
+                "Responsibility": 10.0,
+                "Leadership": 10.0,
+                "Vision": 10.0,
+                "Order": 10.0,
+                "Service": 10.0
+            },
+            "Warrior": {
+                "Discipline": 10.0,
+                "Courage": 9.0,
+                "Action": 9.0,
+                "Boundaries": 9.0,
+                "Endurance": 9.0
+            },
+            "Magician": {
+                "Knowledge": 9.0,
+                "Problem Solving": 9.0,
+                "Insight": 9.0,
+                "Strategy": 9.0,
+                "Awareness": 9.0
+            },
+            "Lover": {
+                "Connection": 8.0,
+                "Creativity": 8.0,
+                "Empathy": 8.0,
+                "Presence": 8.0,
+                "Vitality": 7.0
+            }
+        },
+        "dominant": "King",
+        "growth_area": "Lover",
+        "recommendation": "Increase connection through presence, gratitude, beauty, creativity, or emotional openness."
+    },
+    {
+        "name": "Erik",
+        "email": "erikmcreason@gmail.com",
+        "scores": {
+            "King": 10.0,
+            "Warrior": 9.0,
+            "Magician": 8.0,
+            "Lover": 7.0
+        },
+        "dimension_scores": {
+            "King": {
+                "Responsibility": 10.0,
+                "Leadership": 10.0,
+                "Vision": 10.0,
+                "Order": 10.0,
+                "Service": 10.0
+            },
+            "Warrior": {
+                "Discipline": 9.0,
+                "Courage": 9.0,
+                "Action": 9.0,
+                "Boundaries": 9.0,
+                "Endurance": 9.0
+            },
+            "Magician": {
+                "Knowledge": 8.0,
+                "Problem Solving": 8.0,
+                "Insight": 8.0,
+                "Strategy": 8.0,
+                "Awareness": 8.0
+            },
+            "Lover": {
+                "Connection": 7.0,
+                "Creativity": 7.0,
+                "Empathy": 7.0,
+                "Presence": 7.0,
+                "Vitality": 7.0
+            }
+        },
+        "dominant": "King",
+        "growth_area": "Lover",
+        "recommendation": "Increase connection through presence, gratitude, beauty, creativity, or emotional openness."
+    },
+    {
+        "name": "Erik 2",
+        "email": "erikmcreason@gmail.com",
+        "scores": {
+            "King": 10.0,
+            "Warrior": 9.0,
+            "Magician": 8.0,
+            "Lover": 7.0
+        },
+        "dimension_scores": {
+            "King": {
+                "Responsibility": 10.0,
+                "Leadership": 10.0,
+                "Vision": 10.0,
+                "Order": 10.0,
+                "Service": 10.0
+            },
+            "Warrior": {
+                "Discipline": 9.0,
+                "Courage": 9.0,
+                "Action": 9.0,
+                "Boundaries": 9.0,
+                "Endurance": 9.0
+            },
+            "Magician": {
+                "Knowledge": 8.0,
+                "Problem Solving": 8.0,
+                "Insight": 8.0,
+                "Strategy": 8.0,
+                "Awareness": 8.0
+            },
+            "Lover": {
+                "Connection": 7.0,
+                "Creativity": 7.0,
+                "Empathy": 7.0,
+                "Presence": 7.0,
+                "Vitality": 7.0
+            }
+        },
+        "dominant": "King",
+        "growth_area": "Lover",
+        "recommendation": "Increase connection through presence, gratitude, beauty, creativity, or emotional openness."
+    }
+]
